@@ -1,4 +1,8 @@
 using GAirFlight.UI.Contexts;
+using GAirFlight.UI.Repositories;
+using GAirFlight.UI.Repositories.Abstract;
+using GAirFlight.UI.Services.Flight;
+using GAirFlight.UI.Services.Flight.Abstract;
 using GAirFlight.UI.Settings;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,6 +14,8 @@ builder.Services.AddControllersWithViews();
 //implement the option design pattern for the database connection string
 builder.Services.Configure<DatabaseSetting>(
 	builder.Configuration.GetSection("ConnectionStrings"));
+builder.Services.AddScoped<IFlightRepository, FlightRepository>();
+builder.Services.AddScoped<IFlightService, FlightService>();
 
 builder.Services.AddDbContext<GAirDbContext>(options =>
 {
